@@ -1,71 +1,52 @@
-# ros2_tutorial
+# tp_turtle_regulation_Sallah_Kiady
 
-## Installation
 
-Create a ros workspace:
+## Partie 1 - Question 7
 
-```
+- Pour un Kp élevé, => la tortue s'oriente rapidement , dépasse le waypoint, puis revient dessus. En résumé, elle tourne sur elle-même.
+
+- Pour un Kp faible => La tortue met du temps à s’orienter vers le waypoint, mais elle finit par se placer correctement dessus
+
+- Le Kp choisi est de 2. La tortue s'oriente a une vitesse considerable et se pointe correctement vers le waypoint
+
+## Partie 2 - Question 5
+
+- Pour un Kpl élevé, => La tortue se dirige en bas a gauche
+
+- Pour un Kpl faible => La tortue se dirige en haut a droite
+
+- Le Kpl choisi est de -1 La tortue se dirge donc en haut a droite
+
+## Etapes pour utiliser les packages
+
+### Installation
+Creer un ros workspace:
+```bash
 mkdir -p ~/ros2_ws/src
 cd ~/ros2_ws
 colcon build
 ```
-Then go the src folder then clone the repo:
 
-```
+Aller dans le dossier src et clone le repo:
+```bash
 cd ~/ros2_ws/src
-git clone https://github.com/Kramoth/ros2_tutorial.git
+git clone https://github.com/kiki781227/tp_turtle_regulation_Sallah_Kiady.git
 ```
 
-Then go back to the root of your ros workspace:
-
-```
+Revenir a la racine du workspace:
+```bash
 cd ~/ros2_ws/
 colcon build
 ```
 
-## run the nodes
-
-To run the differents nodes:
-
-```
-cd ~/ros2_ws
-source install/setup.bash
-ros2 run my_py_pkg first_node 
-#or 
-ros2 run my_py_pkg first_oop_node 
-#or 
-ros2 run my_py_pkg first_sub_node 
-#or 
-ros2 run my_py_pkg first_pub_node 
-```
-When you open a new terminal make sure that you have sourced the setup.bash file every time
-## test publisher
-
-In a terminal run the first_pub node then open a second terminal then type this command:
-
-```
-ros2 topic echo /published_topic
+### Pour tester le subscriber/publisher
+Ouvrir l'interface de turtlesim sur un terminal:
+```bash
+ros2 run turtlesim turtlesim_node
 ```
 
-## test subscriber
-
-
-In a terminal run the first_sub node then open a second terminal then type this command:
-
+Ouvrir un autre terminal: 
+```bash
+ros2 run turtle_regulation tt1_pub_node 
 ```
-ros2 topic pub /subscribed_topic example_interfaces/msg/String "data: 'hello'"
-```
-
-## connect publisher and subscriber
-
-If you noticed correctly, you will see that the publisher publishes on /published_topic and the subscriber on /subscribed_topic to connect them we need to do a remap.
-
-In a terminal run the publisher node
-```
-ros2 run my_py_pkg first_pub_node
-```
-In another terminal 
-```
-ros2 run my_py_pkg first_sub_node --ros-args --remap /subscribed_topic:=/published_topic
-``` 
 
